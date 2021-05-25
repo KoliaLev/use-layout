@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 export const useLayout = () => {
   const [columns, setColumns] = useState(1);
 
-  const getNumberOfColumns = (e) => {
-    const screenWidth = e.target.innerWidth;
-    console.log(screenWidth);
+  const getNumberOfColumns = () => {
+    const screenWidth = window.innerWidth;
     if (screenWidth < 768) {
       return setColumns(1);
     }
@@ -21,7 +20,9 @@ export const useLayout = () => {
   };
 
   useEffect(() => {
+    getNumberOfColumns();
     window.addEventListener("resize", getNumberOfColumns);
+
     return () => window.removeEventListener("resize", getNumberOfColumns);
   }, []);
 
